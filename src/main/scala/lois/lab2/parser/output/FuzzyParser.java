@@ -11,7 +11,11 @@
 
 
 import org.antlr.runtime.*;
-import java.util.Stack;
+
+    import java.io.File;
+    import java.io.FileWriter;
+    import java.io.IOException;
+    import java.util.Stack;
 import java.util.List;
 import java.util.ArrayList;
 
@@ -80,8 +84,35 @@ public class FuzzyParser extends Parser {
             } else {
                 System.out.println("Success!");
                 System.out.println(KnowledgeBase.toString());
+                printResult();
            	}
        	}
+
+        public static void printResult() throws IOException {
+            File outputFile = new File("output.txt");
+            FileWriter writer = new FileWriter(outputFile);
+
+            StringBuilder resultString = new StringBuilder();
+            resultString.append("------------------------ Факты --------------------------\n\n\n");
+
+            for (int i = 0; i < KnowledgeBase.facts().size(); i++) {
+                resultString.append(KnowledgeBase.facts().apply(i).toString()).append("\n\n");
+            }
+
+            resultString.append("\n\n\n------------------------ Правила ------------------------\n\n\n");
+
+            for (int i = 0; i < KnowledgeBase.rules().size(); i++) {
+                Rule rule = KnowledgeBase.rules().apply(i);
+                resultString.append(rule.toString()).append("\n");
+                resultString.append("Матрица: \n");
+                resultString.append(rule.relationMatrix().toString()).append("\n");
+            }
+
+            resultString.append("\n\n\n------------------------ Вывод --------------------------\n\n\n");
+
+            writer.write(resultString.toString());
+            writer.close();
+        }
 
         public String getErrorHeader(RecognitionException e) {
             errorLine = e.line;

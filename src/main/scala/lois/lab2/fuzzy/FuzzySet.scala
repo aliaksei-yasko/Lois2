@@ -16,5 +16,14 @@ class FuzzySet(val name: java.lang.String, val elements: List[FuzzyElement]) {
         case _ => false
     }
 
-    override def toString = name + elements
+    override def toString: String = {
+        val stringBuilder = new StringBuilder(name)
+        stringBuilder.append(" = {")
+
+        for (element <- elements) {
+            stringBuilder.append("(").append(element.name).append(", ").append(element.probability).append(")")
+        }
+
+        stringBuilder.append("}").toString()
+    }
 }

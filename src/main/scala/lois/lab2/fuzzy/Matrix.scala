@@ -43,33 +43,16 @@ class Matrix(array: Array[Array[Float]]) {
         sup
     }
 
-    /**
-     * Multiplication of the two matrix.
-     *
-     * @param matrix second matrix to multiply
-     * @return Matrix result matrix
-     */
-    def *(matrix: Matrix): Matrix = {
+    override def toString: String = {
+        val stringBuilder = new StringBuilder
 
-        if (matrixData(0).length != matrix.matrixData.length) {
-            throw new IllegalStateException("Wrong MatrixTest to multiply!")
-        }
-
-        val result = Array.ofDim[Float](matrixData.length, matrix.matrixData(0).length)
-
-        val r = matrixData.length
-        val m = matrix.matrixData(0).length
-
-        for (i <- 0 until matrixData.length) {
-
-            for (j <- 0 until matrix.matrixData(0).length) {
-
-                for (k <- 0 until matrix.matrixData.length) {
-                    result(i)(j) = result(i)(j) + matrixData(i)(k) * matrix.matrixData(k)(j)
-                }
+        for (row <- matrixData) {
+            for (element <- row) {
+                stringBuilder.append(element).append("  ")
             }
+            stringBuilder.append("\n")
         }
 
-        new Matrix(result)
+        stringBuilder.toString()
     }
 }
