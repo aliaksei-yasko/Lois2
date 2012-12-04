@@ -14,7 +14,7 @@ class Matrix(array: Array[Array[Float]]) {
      *
      * @param i row number
      * @param j column number
-     * @return Double value from the matrix
+     * @return Float value from the matrix
      */
     def getValue(i: Int, j: Int): Float = matrixData(i)(j)
 
@@ -22,7 +22,7 @@ class Matrix(array: Array[Array[Float]]) {
      * Returns matrix row with i number.
      *
      * @param i row number
-     * @return Array[Double] row from matrix
+     * @return Array[Float] row from matrix
      */
     def getRow(i: Int): Array[Float] = matrixData(i)
 
@@ -55,7 +55,7 @@ class Matrix(array: Array[Array[Float]]) {
             throw new IllegalStateException("Wrong MatrixTest to multiply!")
         }
 
-        val result = Array.ofDim[Double](matrixData.length, matrix.matrixData(0).length)
+        val result = Array.ofDim[Float](matrixData.length, matrix.matrixData(0).length)
 
         val r = matrixData.length
         val m = matrix.matrixData(0).length

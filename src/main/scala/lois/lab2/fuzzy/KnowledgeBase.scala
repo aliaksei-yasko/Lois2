@@ -19,4 +19,6 @@ object KnowledgeBase {
     def addRule(rule: Rule) {
         rules += rule
     }
+
+    override def toString = "KnowledgeBase: {[Facts:" + facts + "]" + "[Rules" + rules + "]}"
 }

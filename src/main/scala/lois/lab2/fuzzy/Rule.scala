@@ -5,4 +5,5 @@ package lois.lab2.fuzzy
  */
 class Rule(val reason: String, val consequent: String) {
 
+    override def toString = reason + "=>" + consequent
 }
