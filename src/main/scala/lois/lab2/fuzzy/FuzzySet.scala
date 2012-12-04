@@ -1,13 +1,15 @@
 package lois.lab2.fuzzy
 
+import java.util
+
 /**
  * @author Q-YAA
  */
-class FuzzySet(val name: String, val elements: List[(String, Float)]) {
+class FuzzySet(val name: java.lang.String, val elements: List[FuzzyElement]) {
 
-    def getElement(name: String): (String, Float) = elements.find(element => element._1 == name).get
+    def getElement(name: String): FuzzyElement = elements.find(element => element.name == name).get
 
-    def getElementProbability(name: String) = getElement(name)._2
+    def getElementProbability(name: String) = getElement(name).probability
     
     override def equals(other: Any) = other match {
         case that: FuzzySet => this.name == that.name && this.elements == that.elements

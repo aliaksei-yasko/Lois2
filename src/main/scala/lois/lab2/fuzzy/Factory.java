@@ -1,16 +1,15 @@
 package lois.lab2.fuzzy;
 
-//import java.util.List;
+import java.util.List;
 
-import scala.Tuple2;
-import scala.collection.immutable.List;
+import scala.collection.JavaConversions;
 
 /**
  * @author Q-YAA
  */
 public class Factory {
 
-    public static FuzzySet createFuzzySet(String name, List<Tuple2<String, scala.Float>> elements) {
-        return new FuzzySet(name, elements);
+    public static FuzzySet createFuzzySet(String name, List<FuzzyElement> elements) {
+        return new FuzzySet(name, JavaConversions.asBuffer(elements).toList());
     }
 }

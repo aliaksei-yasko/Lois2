@@ -9,6 +9,7 @@ options {
     package lois.lab2.parser.output;    
 	
 	import lois.lab2.fuzzy.FuzzySet;
+	import lois.lab2.fuzzy.FuzzyElement;
 	import lois.lab2.fuzzy.KnowledgeBase;
 	import lois.lab2.fuzzy.Rule;
 	import scala.Tuple2;
@@ -70,7 +71,11 @@ ruleList
 	;
 	
 fact
-	: name '=' '{' elementList '}' {Factory.createFuzzySet($name.object, $elementList.list);}
+	: name '=' '{' elementList '}' 
+	{
+		FuzzySet fact = Factory.createFuzzySet($name.object, $elementList.list);
+		KnowledgeBase.addFact(fact);
+	}
 	;
 
 name returns[String object]
@@ -78,21 +83,24 @@ name returns[String object]
 	: (LETTER { $object = $object + $LETTER.getText(); } )+
 	;
 
-elementList returns[List<Tuple2> list]
-@init { $list = new ArrayList<Tuple2>(); }
+elementList returns[List<FuzzyElement> list]
+@init { $list = new ArrayList<FuzzyElement>(); }
 	: f=element { $list.add($f.object); } (',' s=element { $list.add($s.object); })*
 	;
 
-element returns[Tuple2 object]
+element returns[FuzzyElement object]
 @init { String elementName = ""; String elementProbability = ""; }
 	: '(' (s=(LETTER | DIGIT) { elementName = elementName + $s.getText(); })+ ',' p=(BEFORE_ONE | ONE) { elementProbability = $p.getText(); } ')' 
 	{
-		$object = new Tuple2(elementName, elementProbability);	
+		$object = new FuzzyElement(elementName, elementProbability);	
 	}
 	;
 
 rule
-	: name '=>' name
+	: f=name '=>' s=name
+	{
+		KnowledgeBase.addRule(new Rule(KnowledgeBase.getFact(f), KnowledgeBase.getFact(s)));
+	}
 	;
 	
 

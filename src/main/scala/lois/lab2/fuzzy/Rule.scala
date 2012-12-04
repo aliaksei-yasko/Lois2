@@ -3,7 +3,7 @@ package lois.lab2.fuzzy
 /**
  * @author Q-YAA
  */
-class Rule(val reason: String, val consequent: String) {
+class Rule(val reason: FuzzySet, val consequent: FuzzySet) {
 
-    override def toString = reason + "=>" + consequent
+    override def toString = reason.name + "=>" + consequent.name
 }

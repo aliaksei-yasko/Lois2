@@ -1,8 +1,9 @@
-// $ANTLR 3.2 Sep 23, 2009 12:02:23 D:\\MyDocuments\\GitRepo\\Lois2\\src\\main\\scala\\lois\\lab2\\parser\\Fuzzy.g 2012-12-04 05:25:44
+// $ANTLR 3.4 D:\\MyDocuments\\University\\Labs\\ЛОИС\\lab2\\Lois2\\src\\main\\scala\\lois\\lab2\\parser\\Fuzzy.g 2012-12-04 16:26:05
 
     package lois.lab2.parser.output;    
 	
 	import lois.lab2.fuzzy.FuzzySet;
+	import lois.lab2.fuzzy.FuzzyElement;
 	import lois.lab2.fuzzy.KnowledgeBase;
 	import lois.lab2.fuzzy.Rule;
 	import scala.Tuple2;
@@ -14,41 +15,45 @@ import java.util.Stack;
 import java.util.List;
 import java.util.ArrayList;
 
+@SuppressWarnings({"all", "warnings", "unchecked"})
 public class FuzzyParser extends Parser {
     public static final String[] tokenNames = new String[] {
-        "<invalid>", "<EOR>", "<DOWN>", "<UP>", "LETTER", "DIGIT", "BEFORE_ONE", "ONE", "SPACE", "COMMENT", "'.'", "'='", "'{'", "'}'", "','", "'('", "')'", "'=>'"
+        "<invalid>", "<EOR>", "<DOWN>", "<UP>", "BEFORE_ONE", "COMMENT", "DIGIT", "LETTER", "ONE", "SPACE", "'('", "')'", "','", "'.'", "'='", "'=>'", "'{'", "'}'"
     };
-    public static final int T__16=16;
-    public static final int BEFORE_ONE=6;
-    public static final int T__15=15;
-    public static final int T__17=17;
-    public static final int T__12=12;
-    public static final int T__11=11;
-    public static final int LETTER=4;
-    public static final int T__14=14;
-    public static final int T__13=13;
-    public static final int T__10=10;
-    public static final int ONE=7;
-    public static final int DIGIT=5;
-    public static final int COMMENT=9;
-    public static final int SPACE=8;
+
     public static final int EOF=-1;
+    public static final int T__10=10;
+    public static final int T__11=11;
+    public static final int T__12=12;
+    public static final int T__13=13;
+    public static final int T__14=14;
+    public static final int T__15=15;
+    public static final int T__16=16;
+    public static final int T__17=17;
+    public static final int BEFORE_ONE=4;
+    public static final int COMMENT=5;
+    public static final int DIGIT=6;
+    public static final int LETTER=7;
+    public static final int ONE=8;
+    public static final int SPACE=9;
 
     // delegates
+    public Parser[] getDelegates() {
+        return new Parser[] {};
+    }
+
     // delegators
 
 
-        public FuzzyParser(TokenStream input) {
-            this(input, new RecognizerSharedState());
-        }
-        public FuzzyParser(TokenStream input, RecognizerSharedState state) {
-            super(input, state);
-             
-        }
-        
+    public FuzzyParser(TokenStream input) {
+        this(input, new RecognizerSharedState());
+    }
+    public FuzzyParser(TokenStream input, RecognizerSharedState state) {
+        super(input, state);
+    }
 
     public String[] getTokenNames() { return FuzzyParser.tokenNames; }
-    public String getGrammarFileName() { return "D:\\MyDocuments\\GitRepo\\Lois2\\src\\main\\scala\\lois\\lab2\\parser\\Fuzzy.g"; }
+    public String getGrammarFileName() { return "D:\\MyDocuments\\University\\Labs\\ЛОИС\\lab2\\Lois2\\src\\main\\scala\\lois\\lab2\\parser\\Fuzzy.g"; }
 
 
 
@@ -90,18 +95,19 @@ public class FuzzyParser extends Parser {
 
 
     // $ANTLR start "base"
-    // D:\\MyDocuments\\GitRepo\\Lois2\\src\\main\\scala\\lois\\lab2\\parser\\Fuzzy.g:60:1: base : factList ( ruleList )? ;
+    // D:\\MyDocuments\\University\\Labs\\ЛОИС\\lab2\\Lois2\\src\\main\\scala\\lois\\lab2\\parser\\Fuzzy.g:61:1: base : factList ( ruleList )? ;
     public final void base() throws RecognitionException {
         try {
-            // D:\\MyDocuments\\GitRepo\\Lois2\\src\\main\\scala\\lois\\lab2\\parser\\Fuzzy.g:61:2: ( factList ( ruleList )? )
-            // D:\\MyDocuments\\GitRepo\\Lois2\\src\\main\\scala\\lois\\lab2\\parser\\Fuzzy.g:61:4: factList ( ruleList )?
+            // D:\\MyDocuments\\University\\Labs\\ЛОИС\\lab2\\Lois2\\src\\main\\scala\\lois\\lab2\\parser\\Fuzzy.g:62:2: ( factList ( ruleList )? )
+            // D:\\MyDocuments\\University\\Labs\\ЛОИС\\lab2\\Lois2\\src\\main\\scala\\lois\\lab2\\parser\\Fuzzy.g:62:4: factList ( ruleList )?
             {
             pushFollow(FOLLOW_factList_in_base48);
             factList();
 
             state._fsp--;
 
-            // D:\\MyDocuments\\GitRepo\\Lois2\\src\\main\\scala\\lois\\lab2\\parser\\Fuzzy.g:61:13: ( ruleList )?
+
+            // D:\\MyDocuments\\University\\Labs\\ЛОИС\\lab2\\Lois2\\src\\main\\scala\\lois\\lab2\\parser\\Fuzzy.g:62:13: ( ruleList )?
             int alt1=2;
             int LA1_0 = input.LA(1);
 
@@ -110,7 +116,7 @@ public class FuzzyParser extends Parser {
             }
             switch (alt1) {
                 case 1 :
-                    // D:\\MyDocuments\\GitRepo\\Lois2\\src\\main\\scala\\lois\\lab2\\parser\\Fuzzy.g:61:13: ruleList
+                    // D:\\MyDocuments\\University\\Labs\\ЛОИС\\lab2\\Lois2\\src\\main\\scala\\lois\\lab2\\parser\\Fuzzy.g:62:13: ruleList
                     {
                     pushFollow(FOLLOW_ruleList_in_base50);
                     ruleList();
@@ -131,21 +137,24 @@ public class FuzzyParser extends Parser {
             reportError(re);
             recover(input,re);
         }
+
         finally {
+        	// do for sure before leaving
         }
         return ;
     }
     // $ANTLR end "base"
 
 
+
     // $ANTLR start "factList"
-    // D:\\MyDocuments\\GitRepo\\Lois2\\src\\main\\scala\\lois\\lab2\\parser\\Fuzzy.g:64:1: factList : ( fact '.' )+ ;
+    // D:\\MyDocuments\\University\\Labs\\ЛОИС\\lab2\\Lois2\\src\\main\\scala\\lois\\lab2\\parser\\Fuzzy.g:65:1: factList : ( fact '.' )+ ;
     public final void factList() throws RecognitionException {
         try {
-            // D:\\MyDocuments\\GitRepo\\Lois2\\src\\main\\scala\\lois\\lab2\\parser\\Fuzzy.g:65:2: ( ( fact '.' )+ )
-            // D:\\MyDocuments\\GitRepo\\Lois2\\src\\main\\scala\\lois\\lab2\\parser\\Fuzzy.g:65:4: ( fact '.' )+
+            // D:\\MyDocuments\\University\\Labs\\ЛОИС\\lab2\\Lois2\\src\\main\\scala\\lois\\lab2\\parser\\Fuzzy.g:66:2: ( ( fact '.' )+ )
+            // D:\\MyDocuments\\University\\Labs\\ЛОИС\\lab2\\Lois2\\src\\main\\scala\\lois\\lab2\\parser\\Fuzzy.g:66:4: ( fact '.' )+
             {
-            // D:\\MyDocuments\\GitRepo\\Lois2\\src\\main\\scala\\lois\\lab2\\parser\\Fuzzy.g:65:4: ( fact '.' )+
+            // D:\\MyDocuments\\University\\Labs\\ЛОИС\\lab2\\Lois2\\src\\main\\scala\\lois\\lab2\\parser\\Fuzzy.g:66:4: ( fact '.' )+
             int cnt2=0;
             loop2:
             do {
@@ -153,14 +162,15 @@ public class FuzzyParser extends Parser {
                 alt2 = dfa2.predict(input);
                 switch (alt2) {
             	case 1 :
-            	    // D:\\MyDocuments\\GitRepo\\Lois2\\src\\main\\scala\\lois\\lab2\\parser\\Fuzzy.g:65:5: fact '.'
+            	    // D:\\MyDocuments\\University\\Labs\\ЛОИС\\lab2\\Lois2\\src\\main\\scala\\lois\\lab2\\parser\\Fuzzy.g:66:5: fact '.'
             	    {
             	    pushFollow(FOLLOW_fact_in_factList64);
             	    fact();
 
             	    state._fsp--;
 
-            	    match(input,10,FOLLOW_10_in_factList66); 
+
+            	    match(input,13,FOLLOW_13_in_factList66); 
 
             	    }
             	    break;
@@ -182,21 +192,24 @@ public class FuzzyParser extends Parser {
             reportError(re);
             recover(input,re);
         }
+
         finally {
+        	// do for sure before leaving
         }
         return ;
     }
     // $ANTLR end "factList"
 
 
+
     // $ANTLR start "ruleList"
-    // D:\\MyDocuments\\GitRepo\\Lois2\\src\\main\\scala\\lois\\lab2\\parser\\Fuzzy.g:68:1: ruleList : ( rule '.' )+ ;
+    // D:\\MyDocuments\\University\\Labs\\ЛОИС\\lab2\\Lois2\\src\\main\\scala\\lois\\lab2\\parser\\Fuzzy.g:69:1: ruleList : ( rule '.' )+ ;
     public final void ruleList() throws RecognitionException {
         try {
-            // D:\\MyDocuments\\GitRepo\\Lois2\\src\\main\\scala\\lois\\lab2\\parser\\Fuzzy.g:69:2: ( ( rule '.' )+ )
-            // D:\\MyDocuments\\GitRepo\\Lois2\\src\\main\\scala\\lois\\lab2\\parser\\Fuzzy.g:69:4: ( rule '.' )+
+            // D:\\MyDocuments\\University\\Labs\\ЛОИС\\lab2\\Lois2\\src\\main\\scala\\lois\\lab2\\parser\\Fuzzy.g:70:2: ( ( rule '.' )+ )
+            // D:\\MyDocuments\\University\\Labs\\ЛОИС\\lab2\\Lois2\\src\\main\\scala\\lois\\lab2\\parser\\Fuzzy.g:70:4: ( rule '.' )+
             {
-            // D:\\MyDocuments\\GitRepo\\Lois2\\src\\main\\scala\\lois\\lab2\\parser\\Fuzzy.g:69:4: ( rule '.' )+
+            // D:\\MyDocuments\\University\\Labs\\ЛОИС\\lab2\\Lois2\\src\\main\\scala\\lois\\lab2\\parser\\Fuzzy.g:70:4: ( rule '.' )+
             int cnt3=0;
             loop3:
             do {
@@ -210,14 +223,15 @@ public class FuzzyParser extends Parser {
 
                 switch (alt3) {
             	case 1 :
-            	    // D:\\MyDocuments\\GitRepo\\Lois2\\src\\main\\scala\\lois\\lab2\\parser\\Fuzzy.g:69:5: rule '.'
+            	    // D:\\MyDocuments\\University\\Labs\\ЛОИС\\lab2\\Lois2\\src\\main\\scala\\lois\\lab2\\parser\\Fuzzy.g:70:5: rule '.'
             	    {
             	    pushFollow(FOLLOW_rule_in_ruleList80);
             	    rule();
 
             	    state._fsp--;
 
-            	    match(input,10,FOLLOW_10_in_ruleList82); 
+
+            	    match(input,13,FOLLOW_13_in_ruleList82); 
 
             	    }
             	    break;
@@ -239,39 +253,50 @@ public class FuzzyParser extends Parser {
             reportError(re);
             recover(input,re);
         }
+
         finally {
+        	// do for sure before leaving
         }
         return ;
     }
     // $ANTLR end "ruleList"
 
 
-    // $ANTLR start "fact"
-    // D:\\MyDocuments\\GitRepo\\Lois2\\src\\main\\scala\\lois\\lab2\\parser\\Fuzzy.g:72:1: fact : name '=' '{' elementList '}' ;
-    public final void fact() throws RecognitionException {
-        String name1 = null;
 
-        List<Tuple2> elementList2 = null;
+    // $ANTLR start "fact"
+    // D:\\MyDocuments\\University\\Labs\\ЛОИС\\lab2\\Lois2\\src\\main\\scala\\lois\\lab2\\parser\\Fuzzy.g:73:1: fact : name '=' '{' elementList '}' ;
+    public final void fact() throws RecognitionException {
+        String name1 =null;
+
+        List<FuzzyElement> elementList2 =null;
 
 
         try {
-            // D:\\MyDocuments\\GitRepo\\Lois2\\src\\main\\scala\\lois\\lab2\\parser\\Fuzzy.g:73:2: ( name '=' '{' elementList '}' )
-            // D:\\MyDocuments\\GitRepo\\Lois2\\src\\main\\scala\\lois\\lab2\\parser\\Fuzzy.g:73:4: name '=' '{' elementList '}'
+            // D:\\MyDocuments\\University\\Labs\\ЛОИС\\lab2\\Lois2\\src\\main\\scala\\lois\\lab2\\parser\\Fuzzy.g:74:2: ( name '=' '{' elementList '}' )
+            // D:\\MyDocuments\\University\\Labs\\ЛОИС\\lab2\\Lois2\\src\\main\\scala\\lois\\lab2\\parser\\Fuzzy.g:74:4: name '=' '{' elementList '}'
             {
             pushFollow(FOLLOW_name_in_fact96);
             name1=name();
 
             state._fsp--;
 
-            match(input,11,FOLLOW_11_in_fact98); 
-            match(input,12,FOLLOW_12_in_fact100); 
+
+            match(input,14,FOLLOW_14_in_fact98); 
+
+            match(input,16,FOLLOW_16_in_fact100); 
+
             pushFollow(FOLLOW_elementList_in_fact102);
             elementList2=elementList();
 
             state._fsp--;
 
-            match(input,13,FOLLOW_13_in_fact104); 
-            Factory.createFuzzySet(name1, elementList2);
+
+            match(input,17,FOLLOW_17_in_fact104); 
+
+
+            		FuzzySet fact = Factory.createFuzzySet(name1, elementList2);
+            		KnowledgeBase.addFact(fact);
+            	
 
             }
 
@@ -280,26 +305,30 @@ public class FuzzyParser extends Parser {
             reportError(re);
             recover(input,re);
         }
+
         finally {
+        	// do for sure before leaving
         }
         return ;
     }
     // $ANTLR end "fact"
 
 
+
     // $ANTLR start "name"
-    // D:\\MyDocuments\\GitRepo\\Lois2\\src\\main\\scala\\lois\\lab2\\parser\\Fuzzy.g:76:1: name returns [String object] : ( LETTER )+ ;
+    // D:\\MyDocuments\\University\\Labs\\ЛОИС\\lab2\\Lois2\\src\\main\\scala\\lois\\lab2\\parser\\Fuzzy.g:81:1: name returns [String object] : ( LETTER )+ ;
     public final String name() throws RecognitionException {
         String object = null;
+
 
         Token LETTER3=null;
 
          object = ""; 
         try {
-            // D:\\MyDocuments\\GitRepo\\Lois2\\src\\main\\scala\\lois\\lab2\\parser\\Fuzzy.g:78:2: ( ( LETTER )+ )
-            // D:\\MyDocuments\\GitRepo\\Lois2\\src\\main\\scala\\lois\\lab2\\parser\\Fuzzy.g:78:4: ( LETTER )+
+            // D:\\MyDocuments\\University\\Labs\\ЛОИС\\lab2\\Lois2\\src\\main\\scala\\lois\\lab2\\parser\\Fuzzy.g:83:2: ( ( LETTER )+ )
+            // D:\\MyDocuments\\University\\Labs\\ЛОИС\\lab2\\Lois2\\src\\main\\scala\\lois\\lab2\\parser\\Fuzzy.g:83:4: ( LETTER )+
             {
-            // D:\\MyDocuments\\GitRepo\\Lois2\\src\\main\\scala\\lois\\lab2\\parser\\Fuzzy.g:78:4: ( LETTER )+
+            // D:\\MyDocuments\\University\\Labs\\ЛОИС\\lab2\\Lois2\\src\\main\\scala\\lois\\lab2\\parser\\Fuzzy.g:83:4: ( LETTER )+
             int cnt4=0;
             loop4:
             do {
@@ -313,9 +342,10 @@ public class FuzzyParser extends Parser {
 
                 switch (alt4) {
             	case 1 :
-            	    // D:\\MyDocuments\\GitRepo\\Lois2\\src\\main\\scala\\lois\\lab2\\parser\\Fuzzy.g:78:5: LETTER
+            	    // D:\\MyDocuments\\University\\Labs\\ЛОИС\\lab2\\Lois2\\src\\main\\scala\\lois\\lab2\\parser\\Fuzzy.g:83:5: LETTER
             	    {
-            	    LETTER3=(Token)match(input,LETTER,FOLLOW_LETTER_in_name126); 
+            	    LETTER3=(Token)match(input,LETTER,FOLLOW_LETTER_in_name128); 
+
             	     object = object + LETTER3.getText(); 
 
             	    }
@@ -338,54 +368,62 @@ public class FuzzyParser extends Parser {
             reportError(re);
             recover(input,re);
         }
+
         finally {
+        	// do for sure before leaving
         }
         return object;
     }
     // $ANTLR end "name"
 
 
+
     // $ANTLR start "elementList"
-    // D:\\MyDocuments\\GitRepo\\Lois2\\src\\main\\scala\\lois\\lab2\\parser\\Fuzzy.g:81:1: elementList returns [List<Tuple2> list] : f= element ( ',' s= element )* ;
-    public final List<Tuple2> elementList() throws RecognitionException {
-        List<Tuple2> list = null;
-
-        Tuple2 f = null;
-
-        Tuple2 s = null;
+    // D:\\MyDocuments\\University\\Labs\\ЛОИС\\lab2\\Lois2\\src\\main\\scala\\lois\\lab2\\parser\\Fuzzy.g:86:1: elementList returns [List<FuzzyElement> list] : f= element ( ',' s= element )* ;
+    public final List<FuzzyElement> elementList() throws RecognitionException {
+        List<FuzzyElement> list = null;
 
 
-         list = new ArrayList<Tuple2>(); 
+        FuzzyElement f =null;
+
+        FuzzyElement s =null;
+
+
+         list = new ArrayList<FuzzyElement>(); 
         try {
-            // D:\\MyDocuments\\GitRepo\\Lois2\\src\\main\\scala\\lois\\lab2\\parser\\Fuzzy.g:83:2: (f= element ( ',' s= element )* )
-            // D:\\MyDocuments\\GitRepo\\Lois2\\src\\main\\scala\\lois\\lab2\\parser\\Fuzzy.g:83:4: f= element ( ',' s= element )*
+            // D:\\MyDocuments\\University\\Labs\\ЛОИС\\lab2\\Lois2\\src\\main\\scala\\lois\\lab2\\parser\\Fuzzy.g:88:2: (f= element ( ',' s= element )* )
+            // D:\\MyDocuments\\University\\Labs\\ЛОИС\\lab2\\Lois2\\src\\main\\scala\\lois\\lab2\\parser\\Fuzzy.g:88:4: f= element ( ',' s= element )*
             {
-            pushFollow(FOLLOW_element_in_elementList152);
+            pushFollow(FOLLOW_element_in_elementList154);
             f=element();
 
             state._fsp--;
 
+
              list.add(f); 
-            // D:\\MyDocuments\\GitRepo\\Lois2\\src\\main\\scala\\lois\\lab2\\parser\\Fuzzy.g:83:40: ( ',' s= element )*
+
+            // D:\\MyDocuments\\University\\Labs\\ЛОИС\\lab2\\Lois2\\src\\main\\scala\\lois\\lab2\\parser\\Fuzzy.g:88:40: ( ',' s= element )*
             loop5:
             do {
                 int alt5=2;
                 int LA5_0 = input.LA(1);
 
-                if ( (LA5_0==14) ) {
+                if ( (LA5_0==12) ) {
                     alt5=1;
                 }
 
 
                 switch (alt5) {
             	case 1 :
-            	    // D:\\MyDocuments\\GitRepo\\Lois2\\src\\main\\scala\\lois\\lab2\\parser\\Fuzzy.g:83:41: ',' s= element
+            	    // D:\\MyDocuments\\University\\Labs\\ЛОИС\\lab2\\Lois2\\src\\main\\scala\\lois\\lab2\\parser\\Fuzzy.g:88:41: ',' s= element
             	    {
-            	    match(input,14,FOLLOW_14_in_elementList157); 
-            	    pushFollow(FOLLOW_element_in_elementList161);
+            	    match(input,12,FOLLOW_12_in_elementList159); 
+
+            	    pushFollow(FOLLOW_element_in_elementList163);
             	    s=element();
 
             	    state._fsp--;
+
 
             	     list.add(s); 
 
@@ -405,45 +443,51 @@ public class FuzzyParser extends Parser {
             reportError(re);
             recover(input,re);
         }
+
         finally {
+        	// do for sure before leaving
         }
         return list;
     }
     // $ANTLR end "elementList"
 
 
+
     // $ANTLR start "element"
-    // D:\\MyDocuments\\GitRepo\\Lois2\\src\\main\\scala\\lois\\lab2\\parser\\Fuzzy.g:86:1: element returns [Tuple2 object] : '(' (s= ( LETTER | DIGIT ) )+ ',' p= ( BEFORE_ONE | ONE ) ')' ;
-    public final Tuple2 element() throws RecognitionException {
-        Tuple2 object = null;
+    // D:\\MyDocuments\\University\\Labs\\ЛОИС\\lab2\\Lois2\\src\\main\\scala\\lois\\lab2\\parser\\Fuzzy.g:91:1: element returns [FuzzyElement object] : '(' (s= ( LETTER | DIGIT ) )+ ',' p= ( BEFORE_ONE | ONE ) ')' ;
+    public final FuzzyElement element() throws RecognitionException {
+        FuzzyElement object = null;
+
 
         Token s=null;
         Token p=null;
 
          String elementName = ""; String elementProbability = ""; 
         try {
-            // D:\\MyDocuments\\GitRepo\\Lois2\\src\\main\\scala\\lois\\lab2\\parser\\Fuzzy.g:88:2: ( '(' (s= ( LETTER | DIGIT ) )+ ',' p= ( BEFORE_ONE | ONE ) ')' )
-            // D:\\MyDocuments\\GitRepo\\Lois2\\src\\main\\scala\\lois\\lab2\\parser\\Fuzzy.g:88:4: '(' (s= ( LETTER | DIGIT ) )+ ',' p= ( BEFORE_ONE | ONE ) ')'
+            // D:\\MyDocuments\\University\\Labs\\ЛОИС\\lab2\\Lois2\\src\\main\\scala\\lois\\lab2\\parser\\Fuzzy.g:93:2: ( '(' (s= ( LETTER | DIGIT ) )+ ',' p= ( BEFORE_ONE | ONE ) ')' )
+            // D:\\MyDocuments\\University\\Labs\\ЛОИС\\lab2\\Lois2\\src\\main\\scala\\lois\\lab2\\parser\\Fuzzy.g:93:4: '(' (s= ( LETTER | DIGIT ) )+ ',' p= ( BEFORE_ONE | ONE ) ')'
             {
-            match(input,15,FOLLOW_15_in_element184); 
-            // D:\\MyDocuments\\GitRepo\\Lois2\\src\\main\\scala\\lois\\lab2\\parser\\Fuzzy.g:88:8: (s= ( LETTER | DIGIT ) )+
+            match(input,10,FOLLOW_10_in_element186); 
+
+            // D:\\MyDocuments\\University\\Labs\\ЛОИС\\lab2\\Lois2\\src\\main\\scala\\lois\\lab2\\parser\\Fuzzy.g:93:8: (s= ( LETTER | DIGIT ) )+
             int cnt6=0;
             loop6:
             do {
                 int alt6=2;
                 int LA6_0 = input.LA(1);
 
-                if ( ((LA6_0>=LETTER && LA6_0<=DIGIT)) ) {
+                if ( ((LA6_0 >= DIGIT && LA6_0 <= LETTER)) ) {
                     alt6=1;
                 }
 
 
                 switch (alt6) {
             	case 1 :
-            	    // D:\\MyDocuments\\GitRepo\\Lois2\\src\\main\\scala\\lois\\lab2\\parser\\Fuzzy.g:88:9: s= ( LETTER | DIGIT )
+            	    // D:\\MyDocuments\\University\\Labs\\ЛОИС\\lab2\\Lois2\\src\\main\\scala\\lois\\lab2\\parser\\Fuzzy.g:93:9: s= ( LETTER | DIGIT )
             	    {
             	    s=(Token)input.LT(1);
-            	    if ( (input.LA(1)>=LETTER && input.LA(1)<=DIGIT) ) {
+
+            	    if ( (input.LA(1) >= DIGIT && input.LA(1) <= LETTER) ) {
             	        input.consume();
             	        state.errorRecovery=false;
             	    }
@@ -451,6 +495,7 @@ public class FuzzyParser extends Parser {
             	        MismatchedSetException mse = new MismatchedSetException(null,input);
             	        throw mse;
             	    }
+
 
             	     elementName = elementName + s.getText(); 
 
@@ -466,9 +511,12 @@ public class FuzzyParser extends Parser {
                 cnt6++;
             } while (true);
 
-            match(input,14,FOLLOW_14_in_element201); 
+
+            match(input,12,FOLLOW_12_in_element203); 
+
             p=(Token)input.LT(1);
-            if ( (input.LA(1)>=BEFORE_ONE && input.LA(1)<=ONE) ) {
+
+            if ( input.LA(1)==BEFORE_ONE||input.LA(1)==ONE ) {
                 input.consume();
                 state.errorRecovery=false;
             }
@@ -477,10 +525,13 @@ public class FuzzyParser extends Parser {
                 throw mse;
             }
 
-             elementProbability = p.getText(); 
-            match(input,16,FOLLOW_16_in_element215); 
 
-            		object = new Tuple2(elementName, elementProbability);	
+             elementProbability = p.getText(); 
+
+            match(input,11,FOLLOW_11_in_element217); 
+
+
+            		object = new FuzzyElement(elementName, elementProbability);	
             	
 
             }
@@ -490,31 +541,45 @@ public class FuzzyParser extends Parser {
             reportError(re);
             recover(input,re);
         }
+
         finally {
+        	// do for sure before leaving
         }
         return object;
     }
     // $ANTLR end "element"
 
 
+
     // $ANTLR start "rule"
-    // D:\\MyDocuments\\GitRepo\\Lois2\\src\\main\\scala\\lois\\lab2\\parser\\Fuzzy.g:94:1: rule : name '=>' name ;
+    // D:\\MyDocuments\\University\\Labs\\ЛОИС\\lab2\\Lois2\\src\\main\\scala\\lois\\lab2\\parser\\Fuzzy.g:99:1: rule : f= name '=>' s= name ;
     public final void rule() throws RecognitionException {
+        String f =null;
+
+        String s =null;
+
+
         try {
-            // D:\\MyDocuments\\GitRepo\\Lois2\\src\\main\\scala\\lois\\lab2\\parser\\Fuzzy.g:95:2: ( name '=>' name )
-            // D:\\MyDocuments\\GitRepo\\Lois2\\src\\main\\scala\\lois\\lab2\\parser\\Fuzzy.g:95:4: name '=>' name
+            // D:\\MyDocuments\\University\\Labs\\ЛОИС\\lab2\\Lois2\\src\\main\\scala\\lois\\lab2\\parser\\Fuzzy.g:100:2: (f= name '=>' s= name )
+            // D:\\MyDocuments\\University\\Labs\\ЛОИС\\lab2\\Lois2\\src\\main\\scala\\lois\\lab2\\parser\\Fuzzy.g:100:4: f= name '=>' s= name
             {
-            pushFollow(FOLLOW_name_in_rule230);
-            name();
-
-            state._fsp--;
-
-            match(input,17,FOLLOW_17_in_rule232); 
             pushFollow(FOLLOW_name_in_rule234);
-            name();
+            f=name();
 
             state._fsp--;
 
+
+            match(input,15,FOLLOW_15_in_rule236); 
+
+            pushFollow(FOLLOW_name_in_rule240);
+            s=name();
+
+            state._fsp--;
+
+
+
+            		KnowledgeBase.addRule(new Rule(KnowledgeBase.getFact(f), KnowledgeBase.getFact(s)));
+            	
 
             }
 
@@ -523,7 +588,9 @@ public class FuzzyParser extends Parser {
             reportError(re);
             recover(input,re);
         }
+
         finally {
+        	// do for sure before leaving
         }
         return ;
     }
@@ -538,16 +605,16 @@ public class FuzzyParser extends Parser {
     static final String DFA2_eofS =
         "\1\2\3\uffff";
     static final String DFA2_minS =
-        "\2\4\2\uffff";
+        "\2\7\2\uffff";
     static final String DFA2_maxS =
-        "\1\4\1\21\2\uffff";
+        "\1\7\1\17\2\uffff";
     static final String DFA2_acceptS =
         "\2\uffff\1\2\1\1";
     static final String DFA2_specialS =
         "\4\uffff}>";
     static final String[] DFA2_transitionS = {
             "\1\1",
-            "\1\1\6\uffff\1\3\5\uffff\1\2",
+            "\1\1\6\uffff\1\3\1\2",
             "",
             ""
     };
@@ -582,33 +649,33 @@ public class FuzzyParser extends Parser {
             this.transition = DFA2_transition;
         }
         public String getDescription() {
-            return "()+ loopback of 65:4: ( fact '.' )+";
+            return "()+ loopback of 66:4: ( fact '.' )+";
         }
     }
  
 
-    public static final BitSet FOLLOW_factList_in_base48 = new BitSet(new long[]{0x0000000000000012L});
+    public static final BitSet FOLLOW_factList_in_base48 = new BitSet(new long[]{0x0000000000000082L});
     public static final BitSet FOLLOW_ruleList_in_base50 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_fact_in_factList64 = new BitSet(new long[]{0x0000000000000400L});
-    public static final BitSet FOLLOW_10_in_factList66 = new BitSet(new long[]{0x0000000000000012L});
-    public static final BitSet FOLLOW_rule_in_ruleList80 = new BitSet(new long[]{0x0000000000000400L});
-    public static final BitSet FOLLOW_10_in_ruleList82 = new BitSet(new long[]{0x0000000000000012L});
-    public static final BitSet FOLLOW_name_in_fact96 = new BitSet(new long[]{0x0000000000000800L});
-    public static final BitSet FOLLOW_11_in_fact98 = new BitSet(new long[]{0x0000000000001000L});
-    public static final BitSet FOLLOW_12_in_fact100 = new BitSet(new long[]{0x0000000000008000L});
-    public static final BitSet FOLLOW_elementList_in_fact102 = new BitSet(new long[]{0x0000000000002000L});
-    public static final BitSet FOLLOW_13_in_fact104 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_LETTER_in_name126 = new BitSet(new long[]{0x0000000000000012L});
-    public static final BitSet FOLLOW_element_in_elementList152 = new BitSet(new long[]{0x0000000000004002L});
-    public static final BitSet FOLLOW_14_in_elementList157 = new BitSet(new long[]{0x0000000000008000L});
-    public static final BitSet FOLLOW_element_in_elementList161 = new BitSet(new long[]{0x0000000000004002L});
-    public static final BitSet FOLLOW_15_in_element184 = new BitSet(new long[]{0x0000000000000030L});
-    public static final BitSet FOLLOW_set_in_element189 = new BitSet(new long[]{0x0000000000004030L});
-    public static final BitSet FOLLOW_14_in_element201 = new BitSet(new long[]{0x00000000000000C0L});
-    public static final BitSet FOLLOW_set_in_element205 = new BitSet(new long[]{0x0000000000010000L});
-    public static final BitSet FOLLOW_16_in_element215 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_name_in_rule230 = new BitSet(new long[]{0x0000000000020000L});
-    public static final BitSet FOLLOW_17_in_rule232 = new BitSet(new long[]{0x0000000000000010L});
-    public static final BitSet FOLLOW_name_in_rule234 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_fact_in_factList64 = new BitSet(new long[]{0x0000000000002000L});
+    public static final BitSet FOLLOW_13_in_factList66 = new BitSet(new long[]{0x0000000000000082L});
+    public static final BitSet FOLLOW_rule_in_ruleList80 = new BitSet(new long[]{0x0000000000002000L});
+    public static final BitSet FOLLOW_13_in_ruleList82 = new BitSet(new long[]{0x0000000000000082L});
+    public static final BitSet FOLLOW_name_in_fact96 = new BitSet(new long[]{0x0000000000004000L});
+    public static final BitSet FOLLOW_14_in_fact98 = new BitSet(new long[]{0x0000000000010000L});
+    public static final BitSet FOLLOW_16_in_fact100 = new BitSet(new long[]{0x0000000000000400L});
+    public static final BitSet FOLLOW_elementList_in_fact102 = new BitSet(new long[]{0x0000000000020000L});
+    public static final BitSet FOLLOW_17_in_fact104 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_LETTER_in_name128 = new BitSet(new long[]{0x0000000000000082L});
+    public static final BitSet FOLLOW_element_in_elementList154 = new BitSet(new long[]{0x0000000000001002L});
+    public static final BitSet FOLLOW_12_in_elementList159 = new BitSet(new long[]{0x0000000000000400L});
+    public static final BitSet FOLLOW_element_in_elementList163 = new BitSet(new long[]{0x0000000000001002L});
+    public static final BitSet FOLLOW_10_in_element186 = new BitSet(new long[]{0x00000000000000C0L});
+    public static final BitSet FOLLOW_set_in_element191 = new BitSet(new long[]{0x00000000000010C0L});
+    public static final BitSet FOLLOW_12_in_element203 = new BitSet(new long[]{0x0000000000000110L});
+    public static final BitSet FOLLOW_set_in_element207 = new BitSet(new long[]{0x0000000000000800L});
+    public static final BitSet FOLLOW_11_in_element217 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_name_in_rule234 = new BitSet(new long[]{0x0000000000008000L});
+    public static final BitSet FOLLOW_15_in_rule236 = new BitSet(new long[]{0x0000000000000080L});
+    public static final BitSet FOLLOW_name_in_rule240 = new BitSet(new long[]{0x0000000000000002L});
 
 }
