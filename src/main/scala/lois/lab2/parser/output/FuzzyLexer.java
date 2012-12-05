@@ -414,8 +414,8 @@ public class FuzzyLexer extends Lexer {
         try {
             int _type = SPACE;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // D:\\MyDocuments\\University\\Labs\\ЛОИС\\lab2\\Lois2\\src\\main\\scala\\lois\\lab2\\parser\\Fuzzy.g:120:3: ( ( ' ' | '\\n' | '\\t' | '\\r' ) )
-            // D:\\MyDocuments\\University\\Labs\\ЛОИС\\lab2\\Lois2\\src\\main\\scala\\lois\\lab2\\parser\\Fuzzy.g:121:3: ( ' ' | '\\n' | '\\t' | '\\r' )
+            // D:\\MyDocuments\\University\\Labs\\ЛОИС\\lab2\\Lois2\\src\\main\\scala\\lois\\lab2\\parser\\Fuzzy.g:120:3: ( ( ' ' | '\\n' | '\\applyTNorm' | '\\r' ) )
+            // D:\\MyDocuments\\University\\Labs\\ЛОИС\\lab2\\Lois2\\src\\main\\scala\\lois\\lab2\\parser\\Fuzzy.g:121:3: ( ' ' | '\\n' | '\\applyTNorm' | '\\r' )
             {
             if ( (input.LA(1) >= '\t' && input.LA(1) <= '\n')||input.LA(1)=='\r'||input.LA(1)==' ' ) {
                 input.consume();

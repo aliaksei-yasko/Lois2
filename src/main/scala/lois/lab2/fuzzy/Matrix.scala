@@ -37,10 +37,21 @@ class Matrix(array: Array[Array[Float]]) {
         matrixData(i)(j) = value
     }
 
-    def sup(id: Int): Float = {
-        var sup = Float.MinValue
-        matrixData.foreach(row => sup = if (row(id) > sup) row(id) else sup)
-        sup
+    def sup: Array[Float] = {
+        val supArray = Array.ofDim[Float](matrixData(0).length)
+
+        System.arraycopy(matrixData(0), 0, supArray, 0, supArray.length)
+
+        for (row <- matrixData) {
+            for (i <- 0 until supArray.length) {
+
+                if (supArray(i) < row(i)) {
+                    supArray(i) = row(i)
+                }
+            }
+        }
+
+        supArray
     }
 
     override def toString: String = {

@@ -2,12 +2,12 @@
 
     package lois.lab2.parser.output;    
 	
-	import lois.lab2.fuzzy.FuzzySet;
+	import lois.lab2.fuzzy.FuzzyInferenceResult;
+    import lois.lab2.fuzzy.FuzzySet;
 	import lois.lab2.fuzzy.FuzzyElement;
 	import lois.lab2.fuzzy.KnowledgeBase;
 	import lois.lab2.fuzzy.Rule;
-	import scala.Tuple2;
-	import lois.lab2.fuzzy.Factory;
+    import lois.lab2.fuzzy.Factory;
 
 
 import org.antlr.runtime.*;
@@ -15,8 +15,7 @@ import org.antlr.runtime.*;
     import java.io.File;
     import java.io.FileWriter;
     import java.io.IOException;
-    import java.util.Stack;
-import java.util.List;
+    import java.util.List;
 import java.util.ArrayList;
 
 @SuppressWarnings({"all", "warnings", "unchecked"})
@@ -96,19 +95,26 @@ public class FuzzyParser extends Parser {
             resultString.append("------------------------ Факты --------------------------\n\n\n");
 
             for (int i = 0; i < KnowledgeBase.facts().size(); i++) {
-                resultString.append(KnowledgeBase.facts().apply(i).toString()).append("\n\n");
+                resultString.append(KnowledgeBase.facts().apply(i)).append("\n\n");
             }
 
             resultString.append("\n\n\n------------------------ Правила ------------------------\n\n\n");
 
             for (int i = 0; i < KnowledgeBase.rules().size(); i++) {
                 Rule rule = KnowledgeBase.rules().apply(i);
-                resultString.append(rule.toString()).append("\n");
+                resultString.append(rule).append("\n");
                 resultString.append("Матрица: \n");
-                resultString.append(rule.relationMatrix().toString()).append("\n");
+                resultString.append(rule.matrix()).append("\n");
             }
 
             resultString.append("\n\n\n------------------------ Вывод --------------------------\n\n\n");
+
+            FuzzyInferenceResult[] results = KnowledgeBase.fuzzyInference();
+            for (FuzzyInferenceResult result : results) {
+                resultString.append("Выведено по правилу: ").append(result.rule()).append("\n");
+                resultString.append("Для факта: ").append(result.fact()).append("\n");
+                resultString.append("Результат вывода: ").append(result.result()).append("\n\n");
+            }
 
             writer.write(resultString.toString());
             writer.close();

@@ -5,16 +5,19 @@ package lois.lab2.fuzzy
  */
 class Rule(val reason: FuzzySet, val consequent: FuzzySet) {
 
-    val relationMatrix = new Matrix(Array.ofDim[Float](reason.elements.size, consequent.elements.size))
+    def matrix = KnowledgeBase.applyTNorm(KnowledgeBase.tNorm, reason.getElementsProbability, consequent.getElementsProbability)
 
-    def applyTNorm(tNorm: (Float, Float) => Float) {
-        for (i <- 0 until reason.elements.size) {
-            for (j <- 0 until consequent.elements.size) {
+    def applyTo(fact: FuzzySet): FuzzySet = {
+        val ruleSup = matrix.sup
+        val resultMatrix = KnowledgeBase.applyTNorm(KnowledgeBase.tNorm, fact.getElementsProbability, ruleSup)
+        val newElementsProbability = resultMatrix.sup
 
-                relationMatrix.setValue(i, j,
-                    tNorm(reason.elements(i).probability, consequent.elements(j).probability))
-            }
+        val newElements = Array.ofDim[FuzzyElement](newElementsProbability.length)
+        for (i <- 0 until newElements.length) {
+            newElements(i) = new FuzzyElement(consequent.elements(i).name, newElementsProbability(i).toString)
         }
+
+        new FuzzySet(consequent.name + "'", newElements.toList)
     }
 
     override def toString = reason.name + " => " + consequent.name
