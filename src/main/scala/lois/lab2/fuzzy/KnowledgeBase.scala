@@ -37,10 +37,34 @@ object KnowledgeBase {
     }
 
     def fuzzyInference: Array[FuzzyInferenceResult] = {
-        val fuzzySet = getFact("D")
-        val newFuzzySet = rules.get(0).get.applyTo(fuzzySet)
+        //        val fuzzySet = getFact("D")
+        //        val newFuzzySet = rules.get(0).get.applyTo(fuzzySet)
+        //
+        //        Array(new FuzzyInferenceResult(rules.get(0).get, fuzzySet, newFuzzySet))
 
-        Array(new FuzzyInferenceResult(rules.get(0).get, fuzzySet, newFuzzySet))
+        var inferenceResults = List[FuzzyInferenceResult]()
+        var hasNewFacts = true
+
+        while (hasNewFacts) {
+            hasNewFacts = false
+
+            val inferredFacts: List[FuzzySet] = (for (element <- inferenceResults) yield element.result).toList
+
+            for (fact <- (facts.toList ::: inferredFacts)) {
+                for (rule <- rules) {
+                    val newFact = rule.applyTo(fact)
+
+                    if (newFact != null && !facts.contains(newFact)
+                        && inferenceResults.find(element => element.result == newFact) != null) {
+
+                        hasNewFacts = true
+                        inferenceResults = new FuzzyInferenceResult(rule, fact, newFact) :: inferenceResults
+                    }
+                }
+            }
+        }
+
+        inferenceResults.reverse.toArray
     }
 
     override def toString = "KnowledgeBase: {[Facts:" + facts + "]" + "[Rules" + rules + "]}"

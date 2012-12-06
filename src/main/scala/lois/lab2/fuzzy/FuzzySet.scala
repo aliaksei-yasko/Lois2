@@ -13,7 +13,7 @@ class FuzzySet(val name: java.lang.String, val elements: List[FuzzyElement]) {
     def getElementsProbability: Array[Float] = (for (element <- elements) yield element.probability).toArray
 
     override def equals(other: Any) = other match {
-        case that: FuzzySet => this.name == that.name && this.elements == that.elements
+        case that: FuzzySet => this.elements == that.elements
         case _ => false
     }
 
