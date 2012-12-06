@@ -37,11 +37,6 @@ object KnowledgeBase {
     }
 
     def fuzzyInference: Array[FuzzyInferenceResult] = {
-        //        val fuzzySet = getFact("D")
-        //        val newFuzzySet = rules.get(0).get.applyTo(fuzzySet)
-        //
-        //        Array(new FuzzyInferenceResult(rules.get(0).get, fuzzySet, newFuzzySet))
-
         var inferenceResults = List[FuzzyInferenceResult]()
         var hasNewFacts = true
 
@@ -52,10 +47,11 @@ object KnowledgeBase {
 
             for (fact <- (facts.toList ::: inferredFacts)) {
                 for (rule <- rules) {
+
                     val newFact = rule.applyTo(fact)
 
                     if (newFact != null && !facts.contains(newFact)
-                        && inferenceResults.find(element => element.result == newFact) != null) {
+                        && inferenceResults.find(inferenceResult => inferenceResult.result == newFact) == None) {
 
                         hasNewFacts = true
                         inferenceResults = new FuzzyInferenceResult(rule, fact, newFact) :: inferenceResults
