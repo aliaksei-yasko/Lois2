@@ -5,17 +5,23 @@ package lois.lab2.fuzzy
  */
 class Rule(val reason: FuzzySet, val consequent: FuzzySet) {
 
-    def matrix = KnowledgeBase.applyTNorm(KnowledgeBase.tNorm, reason.getElementsProbability, consequent.getElementsProbability)
-
-    def isAppliedTo(fact: FuzzySet) = checkFactForRule(fact, reason)
+    def matrix = createRuleMatrix(KnowledgeBase.tNorm, reason.getElementsProbability, consequent.getElementsProbability)
 
     def applyTo(fact: FuzzySet): FuzzySet = {
         if (!checkFactForRule(fact, reason)) {
             return null
         }
 
-        val ruleSup = matrix.sup
-        val resultMatrix = KnowledgeBase.applyTNorm(KnowledgeBase.tNorm, fact.getElementsProbability, ruleSup)
+        val resultMatrix = matrix
+
+        for (i <- 0 until resultMatrix.height) {
+            for (j <- 0 until resultMatrix.width) {
+
+                val factElement = fact.getElement(reason.elements(i).name)
+                resultMatrix.setValue(i, j, KnowledgeBase.tNorm(resultMatrix.getValue(i, j), factElement.probability))
+            }
+        }
+
         val newElementsProbability = resultMatrix.sup
 
         val newElements = Array.ofDim[FuzzyElement](newElementsProbability.length)
@@ -23,7 +29,7 @@ class Rule(val reason: FuzzySet, val consequent: FuzzySet) {
             newElements(i) = new FuzzyElement(consequent.elements(i).name, newElementsProbability(i).toString)
         }
 
-        new FuzzySet(consequent.name + "'", newElements.toList)
+        new FuzzySet(createNameForInferredResult(fact, consequent), newElements.toList)
     }
 
     override def toString = reason.name + " => " + consequent.name
@@ -33,8 +39,22 @@ class Rule(val reason: FuzzySet, val consequent: FuzzySet) {
         case _ => false
     }
 
+    private def createRuleMatrix(tNorm: (Float, Float) => Float, first: Array[Float], second: Array[Float]): Matrix = {
+        val matrix = new Matrix(Array.ofDim[Float](first.size, second.size))
+
+        for (i <- 0 until first.size) {
+            for (j <- 0 until second.size) {
+
+                matrix.setValue(i, j,
+                    tNorm(first(i), second(j)))
+            }
+        }
+
+        matrix
+    }
+
     private def checkFactForRule(fact: FuzzySet, reason: FuzzySet): Boolean = {
-        if (reason.elements.size != fact.elements.size) {
+        if (reason.elements.size != fact.elements.size || reason == fact) {
             return false
         }
 
@@ -45,5 +65,15 @@ class Rule(val reason: FuzzySet, val consequent: FuzzySet) {
         }
 
         true
+    }
+
+    private def createNameForInferredResult(fact: FuzzySet, consequent: FuzzySet): String = {
+        val resultNameBuilder = new StringBuilder(consequent.name)
+
+        for (i <- 0 until fact.name.count(symbol => symbol == '\'')) {
+            resultNameBuilder.append("\'")
+        }
+
+        resultNameBuilder.append("\'").toString()
     }
 }

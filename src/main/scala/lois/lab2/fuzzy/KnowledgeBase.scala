@@ -22,20 +22,6 @@ object KnowledgeBase {
         rules += rule
     }
 
-    def applyTNorm(tNorm: (Float, Float) => Float, first: Array[Float], second: Array[Float]): Matrix = {
-        val matrix = new Matrix(Array.ofDim[Float](first.size, second.size))
-
-        for (i <- 0 until first.size) {
-            for (j <- 0 until second.size) {
-
-                matrix.setValue(i, j,
-                    tNorm(first(i), second(j)))
-            }
-        }
-
-        matrix
-    }
-
     def fuzzyInference: Array[FuzzyInferenceResult] = {
         var inferenceResults = List[FuzzyInferenceResult]()
         var hasNewFacts = true
@@ -50,8 +36,7 @@ object KnowledgeBase {
 
                     val newFact = rule.applyTo(fact)
 
-                    if (newFact != null && !facts.contains(newFact)
-                        && inferenceResults.find(inferenceResult => inferenceResult.result == newFact) == None) {
+                    if (newFact != null && inferenceResults.find(inferenceResult => inferenceResult.result == newFact) == None) {
 
                         hasNewFacts = true
                         inferenceResults = new FuzzyInferenceResult(rule, fact, newFact) :: inferenceResults

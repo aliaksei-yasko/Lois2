@@ -54,6 +54,12 @@ class Matrix(array: Array[Array[Float]]) {
         supArray
     }
 
+    def width = if (matrixData.size > 0) matrixData(0).size else 0
+
+    def height = matrixData.size
+
+    def apply(i: Int) = matrixData(i)
+
     override def toString: String = {
         val stringBuilder = new StringBuilder
 
