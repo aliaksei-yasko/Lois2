@@ -5,6 +5,8 @@ import java.util.List;
 import scala.collection.JavaConversions;
 
 /**
+ * Supporting class for the java and scala interoperation.
+ *
  * @author Q-YAA
  */
 public class Factory {

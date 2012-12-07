@@ -1,6 +1,8 @@
 package lois.lab2.fuzzy
 
 /**
+ * Class that store results of the fuzzy inference.
+ *
  * @author Q-YAA
  */
 class FuzzyInferenceResult(val rule: Rule, val fact: FuzzySet, val result: FuzzySet) {

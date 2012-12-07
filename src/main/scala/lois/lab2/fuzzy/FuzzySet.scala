@@ -2,14 +2,25 @@ package lois.lab2.fuzzy
 
 
 /**
+ * Class that represent fuzzy set.
+ *
  * @author Q-YAA
  */
 class FuzzySet(val name: java.lang.String, val elements: List[FuzzyElement]) {
 
+    /**
+     * Get element by name.
+     *
+     * @param name element name
+     * @return element with the given name
+     */
     def getElement(name: String): FuzzyElement = elements.find(element => element.name == name).get
 
-    def getElementProbability(name: String) = getElement(name).probability
-
+    /**
+     * Returns array of the all elements probability.
+     *
+     * @return array of the all elements probability
+     */
     def getElementsProbability: Array[Float] = (for (element <- elements) yield element.probability).toArray
 
     override def equals(other: Any) = other match {

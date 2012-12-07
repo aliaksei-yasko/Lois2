@@ -109,7 +109,7 @@ public class FuzzyParser extends Parser {
 
             resultString.append("\n\n\n------------------------ Вывод --------------------------\n\n\n");
 
-            FuzzyInferenceResult[] results = KnowledgeBase.fuzzyInference();
+            FuzzyInferenceResult[] results = KnowledgeBase.directFuzzyInference();
             for (FuzzyInferenceResult result : results) {
                 resultString.append("Выведено по правилу: ").append(result.rule()).append("\n");
                 resultString.append("Для факта: ").append(result.fact()).append("\n");

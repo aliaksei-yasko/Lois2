@@ -1,12 +1,25 @@
 package lois.lab2.fuzzy
 
 /**
+ * Class that represent fuzzy rule.
+ *
  * @author Q-YAA
  */
 class Rule(val reason: FuzzySet, val consequent: FuzzySet) {
 
+    /**
+     * Calculate matrix (relation table) of the rule.
+     *
+     * @return rule matrix
+     */
     def matrix = createRuleMatrix(KnowledgeBase.tNorm, reason.getElementsProbability, consequent.getElementsProbability)
 
+    /**
+     * Method that apply rule to the given fact.
+     *
+     * @param fact fact ro apply rule
+     * @return new fact
+     */
     def applyTo(fact: FuzzySet): FuzzySet = {
         if (!checkFactForRule(fact, reason)) {
             return null

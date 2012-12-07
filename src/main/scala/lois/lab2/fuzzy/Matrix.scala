@@ -37,6 +37,11 @@ class Matrix(array: Array[Array[Float]]) {
         matrixData(i)(j) = value
     }
 
+    /**
+     * Calculates supremum for every matrix column.
+     *
+     * @return array of the calculated supremum values
+     */
     def sup: Array[Float] = {
         val supArray = Array.ofDim[Float](matrixData(0).length)
 
@@ -54,11 +59,19 @@ class Matrix(array: Array[Array[Float]]) {
         supArray
     }
 
+    /**
+     * Returns matrix width.
+     *
+     * @return matrix width
+     */
     def width = if (matrixData.size > 0) matrixData(0).size else 0
 
+    /**
+     * Returns matrix height.
+     *
+     * @return matrix height
+     */
     def height = matrixData.size
-
-    def apply(i: Int) = matrixData(i)
 
     override def toString: String = {
         val stringBuilder = new StringBuilder
