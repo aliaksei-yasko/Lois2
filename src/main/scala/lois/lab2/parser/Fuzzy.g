@@ -35,7 +35,7 @@ options {
 
     public static void main(String[] args) throws Exception {
     	
-		//String codeFile = args[0];
+		//String baseFile = args[0];
     	String baseFile = "knowledgeBase/knowledgeBase_0.txt";
 
 		//CharStream input = new ANTLRFileStream(args[0]);
