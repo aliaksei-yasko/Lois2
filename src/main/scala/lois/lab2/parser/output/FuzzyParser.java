@@ -13,8 +13,9 @@
 import org.antlr.runtime.*;
 
     import java.io.File;
-    import java.io.FileWriter;
+    import java.io.FileOutputStream;
     import java.io.IOException;
+    import java.io.OutputStreamWriter;
     import java.util.List;
 import java.util.ArrayList;
 
@@ -66,8 +67,8 @@ public class FuzzyParser extends Parser {
 
         public static void main(String[] args) throws Exception {
         	
-    		//String codeFile = args[0];
-        	String baseFile = "knowledgeBase/knowledgeBase_2.txt";
+    		String baseFile = args[0];
+        	//String baseFile = "knowledgeBase/knowledgeBase_2.txt";
 
     		//CharStream input = new ANTLRFileStream(args[0]);
     		FuzzyLexer lexer = new FuzzyLexer(new ANTLRFileStream(baseFile));
@@ -82,15 +83,14 @@ public class FuzzyParser extends Parser {
                 }
             } else {
                 System.out.println("Success!");
-                System.out.println(KnowledgeBase.toString());
                 printResult();
            	}
        	}
 
         public static void printResult() throws IOException {
             File outputFile = new File("output.txt");
-            FileWriter writer = new FileWriter(outputFile);
 
+            OutputStreamWriter writer = new OutputStreamWriter(new FileOutputStream(outputFile), "UTF-8");
             StringBuilder resultString = new StringBuilder();
             resultString.append("------------------------ Факты --------------------------\n\n\n");
 

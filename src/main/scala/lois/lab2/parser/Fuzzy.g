@@ -15,9 +15,10 @@ options {
 	import scala.Tuple2;
 	import lois.lab2.fuzzy.Factory;
 
-	import java.io.File;
-    import java.io.FileWriter;
+    import java.io.File;
+    import java.io.FileOutputStream;
     import java.io.IOException;
+    import java.io.OutputStreamWriter;
     import java.util.List;
     import java.util.ArrayList;
 }
@@ -55,38 +56,38 @@ options {
        	}
    	}
 
-    public static void printResult() throws IOException {
-        File outputFile = new File("output.txt");
-        FileWriter writer = new FileWriter(outputFile);
+        public static void printResult() throws IOException {
+            File outputFile = new File("output.txt");
 
-        StringBuilder resultString = new StringBuilder();
-        resultString.append("------------------------ Факты --------------------------\n\n\n");
+            OutputStreamWriter writer = new OutputStreamWriter(new FileOutputStream(outputFile), "UTF-8");
+            StringBuilder resultString = new StringBuilder();
+            resultString.append("------------------------ Факты --------------------------\n\n\n");
 
-        for (int i = 0; i < KnowledgeBase.facts().size(); i++) {
-            resultString.append(KnowledgeBase.facts().apply(i)).append("\n\n");
+            for (int i = 0; i < KnowledgeBase.facts().size(); i++) {
+                resultString.append(KnowledgeBase.facts().apply(i)).append("\n\n");
+            }
+
+            resultString.append("\n\n\n------------------------ Правила ------------------------\n\n\n");
+
+            for (int i = 0; i < KnowledgeBase.rules().size(); i++) {
+                Rule rule = KnowledgeBase.rules().apply(i);
+                resultString.append(rule).append("\n");
+                resultString.append("Матрица: \n");
+                resultString.append(rule.matrix()).append("\n");
+            }
+
+            resultString.append("\n\n\n------------------------ Вывод --------------------------\n\n\n");
+
+            FuzzyInferenceResult[] results = KnowledgeBase.directFuzzyInference();
+            for (FuzzyInferenceResult result : results) {
+                resultString.append("Выведено по правилу: ").append(result.rule()).append("\n");
+                resultString.append("Для факта: ").append(result.fact()).append("\n");
+                resultString.append("Результат вывода: ").append(result.result()).append("\n\n");
+            }
+
+            writer.write(resultString.toString());
+            writer.close();
         }
-
-        resultString.append("\n\n\n------------------------ Правила ------------------------\n\n\n");
-
-        for (int i = 0; i < KnowledgeBase.rules().size(); i++) {
-            Rule rule = KnowledgeBase.rules().apply(i);
-            resultString.append(rule).append("\n");
-            resultString.append("Матрица: \n");
-            resultString.append(rule.matrix()).append("\n");
-        }
-
-        resultString.append("\n\n\n------------------------ Вывод --------------------------\n\n\n");
-
-        FuzzyInferenceResult[] results = KnowledgeBase.fuzzyInference();
-        for (FuzzyInferenceResult result : results) {
-            resultString.append("Выведено по правилу: ").append(result.rule()).append("\n");
-            resultString.append("Для факта: ").append(result.fact()).append("\n");
-            resultString.append("Результат вывода: ").append(result.result()).append("\n\n");
-        }
-
-        writer.write(resultString.toString());
-        writer.close();
-    }
 
     public String getErrorHeader(RecognitionException e) {
         errorLine = e.line;
