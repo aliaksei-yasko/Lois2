@@ -58,8 +58,12 @@ class Rule(val reason: FuzzySet, val consequent: FuzzySet) {
         for (i <- 0 until first.size) {
             for (j <- 0 until second.size) {
 
-                matrix.setValue(i, j,
-                    tNorm(first(i), second(j)))
+                if (first(i) <= second(j)) {
+                    matrix.setValue(i, j, 1f)
+                }
+                else {
+                    matrix.setValue(i, j, tNorm(first(i), second(j)))
+                }
             }
         }
 
@@ -67,7 +71,7 @@ class Rule(val reason: FuzzySet, val consequent: FuzzySet) {
     }
 
     private def checkFactForRule(fact: FuzzySet, reason: FuzzySet): Boolean = {
-        if (reason.elements.size != fact.elements.size || reason == fact) {
+        if (reason.elements.size != fact.elements.size) {
             return false
         }
 

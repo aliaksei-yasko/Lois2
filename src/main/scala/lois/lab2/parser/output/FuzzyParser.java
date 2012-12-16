@@ -68,7 +68,7 @@ public class FuzzyParser extends Parser {
         public static void main(String[] args) throws Exception {
         	
     		String baseFile = args[0];
-        	//String baseFile = "knowledgeBase/knowledgeBase_2.txt";
+        	//String baseFile = "realease/knowledgeBase_1.txt";
 
     		//CharStream input = new ANTLRFileStream(args[0]);
     		FuzzyLexer lexer = new FuzzyLexer(new ANTLRFileStream(baseFile));
